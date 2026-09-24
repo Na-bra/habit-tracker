@@ -22,6 +22,7 @@ public class HabitTest
         return new TestSuite( HabitTest.class );
     }
 
+    @Override 
     protected void setUp()
     {
         habit = new Habit( "Read" );
