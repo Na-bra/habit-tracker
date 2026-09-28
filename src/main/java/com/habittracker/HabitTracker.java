@@ -62,10 +62,12 @@ public class HabitTracker {
         Habit currHabit = getHabit(habitName);
         boolean isDone = currHabit.getIsDone();
         getHabit(habitName).setIsDone(isDone);
-    }
 
-    public void incrementStreak(String habitName) {
-        getHabit(habitName).increaseStreak();
+        if (isDone == false){
+            currHabit.increaseStreak();
+        }else {
+            // currHabit.decreaseStreak();
+        }
     }
 
     @Override
