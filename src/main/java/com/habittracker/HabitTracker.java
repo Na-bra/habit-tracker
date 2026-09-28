@@ -10,18 +10,6 @@ public class HabitTracker {
         habits = new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        HabitTracker ht = new HabitTracker();
-        String habit1 = "Karate";
-        String habit2 = "Sleeping";
-        String habit3 = "Hello mama";
-
-        ht.createHabit(habit1);
-        ht.createHabit(habit2);
-        ht.createHabit(habit3);
-
-        System.out.println(ht.toString());
-    }
 
     public void createHabit(String habitName) {
         Habit habit = new Habit(habitName);
