@@ -5,17 +5,25 @@ import java.util.Scanner;
 public class Terminal {
 
     private final static String[] COMMANDS = {"add", "complete", "undo"};
-    private Scanner inputStr;
+    private final Scanner inputStr;
+
+    public static void main(String[] args){
+        HabitTracker ht = new HabitTracker();
+        Terminal terminal = new Terminal(ht);
+        
+    }
 
     public Terminal(HabitTracker ht) {
-        System.out.print("Hello welcome to the habit tracker");
+        System.out.println("Hello welcome to the habit tracker");
         inputStr = new Scanner(System.in);
-        start();
+        start(ht);
+        inputStr.close();
 
     }
 
     private void start(HabitTracker ht) {
         //Applet starts 
+        System.out.println("What would you like to do?:" + String.join(", ", COMMANDS));
         String command = inputStr.nextLine();
         readCommand(command, ht);
 
@@ -32,11 +40,12 @@ public class Terminal {
                 }
 
             }
-            if (!found){
-              throw new WrongCommandException(" Invalid command, please choose between " + String.join(", ", COMMANDS));
+            if (!found) {
+                throw new WrongCommandException(" Invalid command, please choose between " + String.join(", ", COMMANDS));
             }
 
-            
+            execute(command, ht);
+
         } catch (WrongCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("Please try again");
@@ -45,7 +54,17 @@ public class Terminal {
         }
     }
 
-    
+    public void execute(String command, HabitTracker ht) {
+        String habitName = inputStr.nextLine();
+        if (command.equals(COMMANDS[0])) {
+            ht.createHabit(habitName);
+            System.out.println(ht.getHabit(habitName).getName()+ " was created ");
+        }
+
+        if (command.equals(COMMANDS[1])){
+            ht.createHabit(habitName);
+        }
+    }
 
     public class WrongCommandException extends Exception {
 
